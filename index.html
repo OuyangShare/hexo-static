@@ -1,184 +1,144 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-  <meta charset="utf-8">
-  
-  
-  <title>Hexo</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="https://ouyangshare.github.io/index.html">
-<meta property="og:site_name" content="Hexo">
-<meta property="og:locale" content="en_US">
-<meta property="article:author" content="John Doe">
-<meta name="twitter:card" content="summary">
-  
-    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
-  
-  
-    <link rel="shortcut icon" href="/favicon.png">
-  
-  
-    
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+    <meta charset="UTF-8">
+    <title>CanvasColock</title>
+</head>
 
-  
-  
-<link rel="stylesheet" href="/css/style.css">
-
-  
-    
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
-
-  
-<meta name="generator" content="Hexo 5.4.0"></head>
-
-<body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">Hexo</a>
-      </h1>
-      
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
-        
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://ouyangshare.github.io"></form>
-      </div>
-    </div>
-  </div>
-</header>
-
-      <div class="outer">
-        <section id="main">
-  
-    <article id="post-hello-world" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2021/04/29/hello-world/" class="article-date">
-  <time class="dt-published" datetime="2021-04-29T06:26:44.151Z" itemprop="datePublished">2021-04-29</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://ouyangshare.github.io/2021/04/29/hello-world/" data-id="cko2o4gbr0000rggi7a8lgob3" data-title="" class="article-share-link">Share</a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-
-
-</section>
-        
-          <aside id="sidebar">
-  
-    
-
-  
-    
-
-  
-    
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">April 2021</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2021/04/29/hello-world/">(no title)</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-
-  
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      
-      &copy; 2021 John Doe<br>
-      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
-    </div>
-  </div>
-</footer>
-
-    </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
-    
-
-
-<script src="/js/jquery-3.4.1.min.js"></script>
-
-
-
-  
-<script src="/fancybox/jquery.fancybox.min.js"></script>
-
-
-
-
-<script src="/js/script.js"></script>
-
-
-
-
-
-  </div>
+<body style="height:100%">
+    <canvas id="canvas" style="height:100%"></canvas>
 </body>
+<script type="text/javascript" src="digit.js"></script>
+<script type="text/javascript">
+    //因为js代码量很少就直接写在html页面了
+    var WINDOW_WIDTH;
+    var WINDOW_HEIGHT;
+    var RADIUS;
+    var context = canvas.getContext("2d");
+    var MARGIN_TOP;
+    var MARGIN_LEFT;
+    var showtime = new Date();
+    var balls = [];
+    const colors = ["#51F511", "#66FAD5", "#EF1C3E", "#FFFA5F", "#DE48CD", "#310CF2"];
+    window.onload = function() {
+        WINDOW_WIDTH = document.documentElement.clientWidth;
+        WINDOW_HEIGHT = document.documentElement.clientHeight;
+        MARGIN_LEFT = Math.round(WINDOW_WIDTH / 10);
+        MARGIN_TOP = Math.round(WINDOW_HEIGHT / 5);
+        RADIUS = Math.round(WINDOW_WIDTH * 4 / 5 / 108) - 1;
+        var canvas = document.getElementById("canvas");
+        showtime = new Date();
+        canvas.width = WINDOW_WIDTH;
+        canvas.height = WINDOW_HEIGHT;
+        setInterval(function() {
+            render(context);
+            update();
+        }, 50);
+
+    }
+
+    function render(cxt) {
+        cxt.clearRect(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
+        var hours = parseInt(showtime.getHours());
+        var minutes = parseInt(showtime.getMinutes());
+        var seconds = parseInt(showtime.getSeconds());
+        renderDigit(MARGIN_LEFT, MARGIN_TOP, parseInt(hours / 10), cxt);
+        renderDigit(MARGIN_LEFT + 15 * (RADIUS + 1), MARGIN_TOP, parseInt(hours % 10), cxt);
+        renderDigit(MARGIN_LEFT + 30 * (RADIUS + 1), MARGIN_TOP, 10, cxt);
+        renderDigit(MARGIN_LEFT + 39 * (RADIUS + 1), MARGIN_TOP, parseInt(minutes / 10), cxt);
+        renderDigit(MARGIN_LEFT + 54 * (RADIUS + 1), MARGIN_TOP, parseInt(minutes % 10), cxt);
+        renderDigit(MARGIN_LEFT + 69 * (RADIUS + 1), MARGIN_TOP, 10, cxt);
+        renderDigit(MARGIN_LEFT + 78 * (RADIUS + 1), MARGIN_TOP, parseInt(seconds / 10), cxt);
+        renderDigit(MARGIN_LEFT + 93 * (RADIUS + 1), MARGIN_TOP, parseInt(seconds % 10), cxt);
+        for (var i = 0; i < balls.length; i++) {
+            cxt.fillStyle = balls[i].color;
+            cxt.beginPath();
+            cxt.arc(balls[i].x, balls[i].y, RADIUS, 0, 2 * Math.PI, true);
+            cxt.closePath();
+            cxt.fill();
+        }
+    }
+
+    function renderDigit(x, y, num, cxt) {
+        cxt.fillStyle = "rgb(0,102,153)";
+        for (var i = 0; i < digit[num].length; i++)
+            for (var j = 0; j < digit[num][i].length; j++)
+                if (digit[num][i][j] == 1) {
+                    cxt.beginPath()
+                    cxt.arc(x + (RADIUS + 1) + j * 2 * (RADIUS + 1), y + (RADIUS + 1) + i * 2 * (RADIUS + 1), RADIUS, 0, 2 * Math.PI);
+                    cxt.closePath();
+                    cxt.fill();
+                }
+    }
+
+    function update() {
+        var nextTime = new Date();
+        var nexttimehours = parseInt(nextTime.getHours());
+        var nexttimeminutes = parseInt(nextTime.getMinutes());
+        var nexttimeseconds = parseInt(nextTime.getSeconds());
+        var showtimehours = parseInt(showtime.getHours());
+        var showtimeminutes = parseInt(showtime.getMinutes());
+        var showtimeseconds = parseInt(showtime.getSeconds());
+        if (nextTime != showtime) {
+            if (parseInt(nexttimehours / 10) != parseInt(showtimehours / 10)) {
+                addballs(MARGIN_LEFT, MARGIN_TOP, parseInt(nexttimehours / 10));
+            };
+            if (parseInt(nexttimehours % 10) != parseInt(showtimehours % 10)) {
+                addballs(MARGIN_LEFT + 15 * (RADIUS + 1), MARGIN_TOP, parseInt(nexttimehours % 10));
+            };
+            if (parseInt(nexttimeminutes / 10) != parseInt(showtimeminutes / 10)) {
+                addballs(MARGIN_LEFT + 39 * (RADIUS + 1), MARGIN_TOP, parseInt(nexttimeminutes / 10));
+            };
+            if (parseInt(nexttimeminutes % 10) != parseInt(showtimeminutes % 10)) {
+                addballs(MARGIN_LEFT + 54 * (RADIUS + 1), MARGIN_TOP, parseInt(nexttimeminutes % 10));
+            };
+            if (parseInt(nexttimeseconds / 10) != parseInt(showtimeseconds / 10)) {
+                addballs(MARGIN_LEFT + 78 * (RADIUS + 1), MARGIN_TOP, parseInt(nexttimeseconds / 10));
+            };
+            if (parseInt(nexttimeseconds % 10) != parseInt(showtimeseconds % 10)) {
+                addballs(MARGIN_LEFT + 93 * (RADIUS + 1), MARGIN_TOP, parseInt(nexttimeseconds % 10));
+            };
+        }
+        showtime = nextTime;
+        updateBalls();
+    }
+
+    function updateBalls() {
+        for (var i = 0; i < balls.length; i++) {
+            balls[i].x += balls[i].vx;
+            balls[i].y += balls[i].vy;
+            balls[i].vy += balls[i].g;
+            if (balls[i].y > WINDOW_HEIGHT - RADIUS) {
+                balls[i].y = WINDOW_HEIGHT - RADIUS;
+                balls[i].vy = -balls[i].vy * 0.6;
+            }
+        }
+        var ballscontol = 0;
+        for (i = 0; i < balls.length; i++)
+            if (balls[i].x + RADIUS > 0 && balls[i].x - RADIUS < WINDOW_WIDTH) {
+                balls[ballscontol++] = balls[i]
+            }
+        while (balls.length > Math.min(ballscontol, 300)) {
+            balls.pop();
+        }
+    }
+
+    function addballs(x, y, num) {
+        for (var i = 0; i < digit[num].length; i++)
+            for (var j = 0; j < digit[num][i].length; j++)
+                if (digit[num][i][j] == 1) {
+                    var newball = {
+                        x: x + (RADIUS + 1) + j * 2 * (RADIUS + 1),
+                        y: y + (RADIUS + 1) + i * 2 * (RADIUS + 1),
+                        g: 1.5 + Math.random(),
+                        vx: Math.pow(-1, Math.floor(Math.random() * 100)) * 5,
+                        vy: -Math.ceil(Math.random() * 10),
+                        color: colors[Math.floor(Math.random() * colors.length)]
+                    }
+                    balls.push(newball);
+                }
+    }
+</script>
+
 </html>
