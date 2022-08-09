@@ -8,11 +8,43 @@
     <title>选号</title>
 </head>
 <style>
-    .num {}
+    .container {
+        display: flex;
+        justify-self: space-around;
+        text-align: center;
+    }
+
+    .num {
+        font-size: 30px;
+        margin: 50px auto;
+        color: #f35626;
+        -webkit-animation: bounce 2s infinite;
+    }
+
+    @-webkit-keyframes bounce {
+
+        0%,
+        100%,
+        20%,
+        50%,
+        80% {
+            -webkit-transform: translateY(0);
+        }
+
+        40% {
+            -webkit-transform: translateY(-30px);
+        }
+
+        60% {
+            -webkit-transform: translateY(-15px);
+        }
+    }
 </style>
 
 <body>
-    <div class="num"></div>
+    <div class="container">
+        <div class="num"></div>
+    </div>
 </body>
 <script>
     (function () {
@@ -31,7 +63,10 @@
             b = '0' + b;
         }
         content.push(b);
-        window.alert(content)
+        const dom = document.querySelector(".num");
+        content = String(content).replaceAll(',', '  ');
+        dom ? (dom.innerHTML = content) : "";
+        // window.alert(content)
     }())
 </script>
 
