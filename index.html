@@ -9,8 +9,8 @@
 </head>
 <style>
     .container {
-        display: flex;
-        justify-self: space-around;
+        /* display: flex; */
+        /* justify-self: space-around; */
         text-align: center;
     }
 
@@ -39,15 +39,25 @@
             -webkit-transform: translateY(-15px);
         }
     }
+
+    .btn {
+        cursor: pointer;
+        width: 100px;
+        height: 40px;
+        background-color: aquamarine;
+        line-height: 40px;
+        margin: auto;
+    }
 </style>
 
 <body>
     <div class="container">
         <div class="num"></div>
+        <div class="btn" onclick="a()">重新选号</div>
     </div>
 </body>
 <script>
-    (function () {
+    function a() {
         var content = [];
         while (content.length < 6) {
             let a = Math.floor((Math.random() * 33) + 1);
@@ -67,7 +77,10 @@
         content = String(content).replaceAll(',', '  ');
         dom ? (dom.innerHTML = content) : "";
         // window.alert(content)
-    }())
+    }
+    window.onload = function () {
+        a();
+    }
 </script>
 
 </html>
