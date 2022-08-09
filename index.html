@@ -1,1 +1,38 @@
-<!DOCTYPE html><html lang=en><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><link rel=icon href=/favicon.ico><title>a-b-c</title><link href=/css/chunk-189f7af4.7e55ca0a.css rel=prefetch><link href=/css/chunk-1cc4c76b.f03c0861.css rel=prefetch><link href=/css/chunk-2496dae7.cf645cd2.css rel=prefetch><link href=/css/chunk-2d6d0a5e.326fc55b.css rel=prefetch><link href=/js/chunk-0e6e880e.fc304521.js rel=prefetch><link href=/js/chunk-10d7b416.f88585a6.js rel=prefetch><link href=/js/chunk-189f7af4.6e43330e.js rel=prefetch><link href=/js/chunk-1cc4c76b.d8c8d416.js rel=prefetch><link href=/js/chunk-2496dae7.e5aac2a3.js rel=prefetch><link href=/js/chunk-2d6d0a5e.ad7e82fc.js rel=prefetch><link href=/js/chunk-7fc40b3a.e7dbc670.js rel=prefetch><link href=/css/app.0eca9548.css rel=preload as=style><link href=/css/chunk-vendors.c470e980.css rel=preload as=style><link href=/js/app.8dc280f0.js rel=preload as=script><link href=/js/chunk-vendors.78218388.js rel=preload as=script><link href=/css/chunk-vendors.c470e980.css rel=stylesheet><link href=/css/app.0eca9548.css rel=stylesheet></head><body><noscript><strong>We're sorry but a-b-c doesn't work properly without JavaScript enabled. Please enable it to continue.</strong></noscript><div id=app></div><script src=/js/chunk-vendors.78218388.js></script><script src=/js/app.8dc280f0.js></script></body></html>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <link rel="icon" href="/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>选号</title>
+</head>
+<style>
+    .num {}
+</style>
+
+<body>
+    <div class="num"></div>
+</body>
+<script>
+    (function () {
+        var content = [];
+        while (content.length < 6) {
+            let a = Math.floor((Math.random() * 33) + 1);
+            if (!content.includes(a)) {
+                if (a < 10) {
+                    a = '0' + a;
+                }
+                content.push(a);
+            }
+        }
+        let b = Math.floor((Math.random() * 16) + 1);
+        if (b < 10) {
+            b = '0' + b;
+        }
+        content.push(b);
+        window.alert(content)
+    }())
+</script>
+
+</html>
