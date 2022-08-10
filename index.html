@@ -16,9 +16,17 @@
 
     .num {
         font-size: 30px;
-        margin: 50px auto;
+        margin: 50px 10px;
         color: #f35626;
+        display: inline-block;
         -webkit-animation: bounce 2s infinite;
+    }
+
+    .blue_num {
+        color: blue;
+        display: inline-block;
+        font-size: 28px;
+        font-weight: 700;
     }
 
     @-webkit-keyframes bounce {
@@ -53,6 +61,7 @@
 <body>
     <div class="container">
         <div class="num"></div>
+        <div class="blue_num"></div>
         <div class="btn" onclick="a()">重新选号</div>
     </div>
 </body>
@@ -72,10 +81,11 @@
         if (b < 10) {
             b = '0' + b;
         }
-        content.push(b);
         const dom = document.querySelector(".num");
         content = String(content).replaceAll(',', '  ');
         dom ? (dom.innerHTML = content) : "";
+        const dom1 = document.querySelector(".blue_num");
+        dom1 ? (dom1.innerHTML = b) : "";
         // window.alert(content)
     }
     window.onload = function () {
