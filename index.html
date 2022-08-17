@@ -100,6 +100,7 @@
     <div class="container">
         <div class="num"></div>
         <div class="blue_num"></div>
+        <div class="last_num"></div>
         <div class="btn" onclick="lottery()">双色球选号/重新选号</div>
     </div>
 
@@ -110,6 +111,8 @@
     </div>
 </body>
 <script>
+    var lotteryRedBlack = ['06', 11, 13, 16, 19, 31];
+    var lotteryBlueBlack = ['02'];
     function lottery() {
         let content = [];
         while (content.length < 6) {
@@ -117,19 +120,31 @@
             if (a < 10) {
                 a = '0' + a;
             }
-            if (!content.includes(a)) {
+            if ((!content.includes(a)) && (!lotteryRedBlack.includes(a))) {
                 content.push(a);
             }
         }
-        let b = Math.floor((Math.random() * 16) + 1);
-        if (b < 10) {
-            b = '0' + b;
+        let redBall = [];
+        while (redBall.length < 1) {
+            let b = Math.floor((Math.random() * 16) + 1);
+            if (b < 10) {
+                b = '0' + b;
+            }
+            console.log(b);
+            console.log(lotteryBlueBlack.includes(b));
+            if (!lotteryBlueBlack.includes(b)) {
+                redBall.push(b);
+            }
         }
+
         const dom = document.querySelector(".num");
         content = String(content).replaceAll(',', '  ');
         dom ? (dom.innerHTML = content) : "";
         const dom1 = document.querySelector(".blue_num");
-        dom1 ? (dom1.innerHTML = b) : "";
+        dom1 ? (dom1.innerHTML = redBall) : "";
+        const domlast = document.querySelector(".last_num");
+        const lotteryBlack = lotteryRedBlack.concat(lotteryBlueBlack);
+        domlast ? (domlast.innerHTML = '上期号码：' + String(lotteryBlack)) : "";
     }
 
     function Lotto() {
