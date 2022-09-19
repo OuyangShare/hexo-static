@@ -101,7 +101,7 @@
         <div class="num"></div>
         <div class="blue_num"></div>
         <div class="last_num"></div>
-        <div class="btn" onclick="lottery()">双色球选号/重新选号</div>
+        <div class="btn" onclick="lottery()">双色球一键选号并复制到粘贴板</div>
     </div>
 
     <div class="container">
@@ -113,6 +113,7 @@
 <script>
     var lotteryRedBlack = [];
     var lotteryBlueBlack = [];
+
     function lottery() {
         let content = [];
         while (content.length < 6) {
@@ -130,8 +131,6 @@
             if (b < 10) {
                 b = '0' + b;
             }
-            console.log(b);
-            console.log(lotteryBlueBlack.includes(b));
             if (!lotteryBlueBlack.includes(b)) {
                 redBall.push(b);
             }
@@ -141,10 +140,19 @@
         content = String(content).replaceAll(',', '  ');
         dom ? (dom.innerHTML = content) : "";
         const dom1 = document.querySelector(".blue_num");
-        dom1 ? (dom1.innerHTML = redBall) : "";
+        dom1 ? (dom1.innerHTML = String(redBall)) : "";
         const domlast = document.querySelector(".last_num");
-        const lotteryBlack = lotteryRedBlack.concat(lotteryBlueBlack);
+        // const lotteryBlack = lotteryRedBlack.concat(lotteryBlueBlack);
         // domlast ? (domlast.innerHTML = '上期号码：' + String(lotteryBlack)) : "";
+        let bollNums = content + ' ' + redBall;
+        console.log(bollNums);
+        console.log(String(bollNums));
+        const inputDom = document.createElement('input');
+        inputDom.value = bollNums;
+        document.body.appendChild(inputDom);
+        inputDom.select();
+        document.execCommand('Copy');
+        inputDom.remove();
     }
 
     function Lotto() {
