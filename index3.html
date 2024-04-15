@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>视频录制示例</title>
+</head>
+<body>
+    <video id="recordedVideo" controls></video>
+    <canvas id="timestampCanvas"></canvas>
+    <button id="startRecording">开始录制</button>
+    <button id="stopRecording">停止录制</button>
+
+    <script>
+        const recordedVideo = document.getElementById('recordedVideo');
+        const timestampCanvas = document.getElementById('timestampCanvas');
+        const startRecordingButton = document.getElementById('startRecording');
+        const stopRecordingButton = document.getElementById('stopRecording');
+        let mediaRecorder;
+        let recordedChunks = [];
+
+        async function startRecording() {
+            const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+            mediaRecorder = new MediaRecorder(stream);
+
+            mediaRecorder.ondataavailable = (event) => {
+                if (event.data.size > 0) {
+                    recordedChunks.push(event.data);
+                }
+            };
+
+            mediaRecorder.onstop = () => {
+                const blob = new Blob(recordedChunks, { type: 'video/webm' });
+                recordedVideo.src = URL.createObjectURL(blob);
+            };
+
+            mediaRecorder.start();
+        }
+
+        function stopRecording() {
+            mediaRecorder.stop();
+        }
+
+        startRecordingButton.addEventListener('click', startRecording);
+        stopRecordingButton.addEventListener('click', stopRecording);
+
+        // 在每一帧录制时，将当前时间戳绘制到 canvas 上
+        function drawTimestamp() {
+            const ctx = timestampCanvas.getContext('2d');
+            const currentTime = new Date().toLocaleString();
+            ctx.clearRect(0, 0, timestampCanvas.width, timestampCanvas.height);
+            ctx.fillText(currentTime, 10, 20);
+            requestAnimationFrame(drawTimestamp);
+        }
+
+        drawTimestamp(); // 开始绘制时间戳
+    </script>
+</body>
+</html>
