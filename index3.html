@@ -12,6 +12,10 @@
     <button id="stopRecording">停止录制</button>
 
     <script>
+
+        cap = cv.VideoCapture(0)
+        console.log(cap);
+
         const recordedVideo = document.getElementById('recordedVideo');
         const timestampCanvas = document.getElementById('timestampCanvas');
         const startRecordingButton = document.getElementById('startRecording');
