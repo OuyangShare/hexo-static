@@ -25,16 +25,16 @@
                 console.error('访问摄像头出错：', error);
             }
         }
-        const a = 0;
+        let a = 0;
         function processVideoFrame() {
             context.drawImage(videoElement, 0, 0, canvasElement.width, canvasElement.height);
             console.log('-------------');
             console.log(videoElement.srcObject);
+            const read = document.getElementById('read');
             if(videoElement.srcObject && a==0) {
-                const read = document.getElementById('read');
                 read.innerText = "获取到视频的时间：" + Date.now()
                 // alert("嘤嘤嘤")
-                ++a;
+                a = ++a;
             }
             // 在这里可以添加更多的处理操作，例如图像滤镜、人脸识别等
             requestAnimationFrame(processVideoFrame);
