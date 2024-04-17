@@ -28,12 +28,11 @@
         let a = 0;
 
         function checkBrightness() {
-            const canvas = document.createElement('canvas');
+            const canvas = document.getElementById('canvasElement');
             const context = canvas.getContext('2d');
             canvas.width = videoElement.videoWidth;
             canvas.height = videoElement.videoHeight;
             context.drawImage(videoElement, 0, 0, canvas.width, canvas.height);
-            debugger;
             const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
             const brightness = imageData.data.reduce((acc, val, idx) => acc + val, 0) / (imageData.data.length * 4);
 
