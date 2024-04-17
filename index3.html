@@ -3,62 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>视频录制示例</title>
+    <title>摄像头视频获取示例</title>
 </head>
 <body>
-    <video id="recordedVideo" controls></video>
-    <canvas id="timestampCanvas"></canvas>
-    <button id="startRecording">开始录制</button>
-    <button id="stopRecording">停止录制</button>
+    <video id="videoElement" autoplay></video>
+    <canvas id="canvasElement"></canvas>
 
     <script>
+        const videoElement = document.getElementById('videoElement');
+        const canvasElement = document.getElementById('canvasElement');
+        const context = canvasElement.getContext('2d');
 
-        cap = cv.VideoCapture(0)
-        console.log(cap);
-        window.alert(cap)
-
-        const recordedVideo = document.getElementById('recordedVideo');
-        const timestampCanvas = document.getElementById('timestampCanvas');
-        const startRecordingButton = document.getElementById('startRecording');
-        const stopRecordingButton = document.getElementById('stopRecording');
-        let mediaRecorder;
-        let recordedChunks = [];
-
-        async function startRecording() {
-            const stream = await navigator.mediaDevices.getUserMedia({ video: true });
-            mediaRecorder = new MediaRecorder(stream);
-
-            mediaRecorder.ondataavailable = (event) => {
-                if (event.data.size > 0) {
-                    recordedChunks.push(event.data);
-                }
-            };
-
-            mediaRecorder.onstop = () => {
-                const blob = new Blob(recordedChunks, { type: 'video/webm' });
-                recordedVideo.src = URL.createObjectURL(blob);
-            };
-
-            mediaRecorder.start();
+        async function startCamera() {
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+                videoElement.srcObject = stream;
+                
+            } catch (error) {
+                console.error('访问摄像头出错：', error);
+            }
+        }
+        const a = 0;
+        function processVideoFrame() {
+            context.drawImage(videoElement, 0, 0, canvasElement.width, canvasElement.height);
+            console.log('-------------');
+            console.log(videoElement.srcObject);
+            if(videoElement.srcObject && a==0) {
+                alert("嘤嘤嘤")
+                ++a;
+            }
+            // 在这里可以添加更多的处理操作，例如图像滤镜、人脸识别等
+            requestAnimationFrame(processVideoFrame);
         }
 
-        function stopRecording() {
-            mediaRecorder.stop();
-        }
+        // 开始获取摄像头视频流
+        startCamera();
 
-        startRecordingButton.addEventListener('click', startRecording);
-        stopRecordingButton.addEventListener('click', stopRecording);
-
-        // 在每一帧录制时，将当前时间戳绘制到 canvas 上
-        function drawTimestamp() {
-            const ctx = timestampCanvas.getContext('2d');
-            const currentTime = new Date().toLocaleString();
-            ctx.clearRect(0, 0, timestampCanvas.width, timestampCanvas.height);
-            ctx.fillText(currentTime, 10, 20);
-            requestAnimationFrame(drawTimestamp);
-        }
-
-        drawTimestamp(); // 开始绘制时间戳
+        // 开始处理视频帧
+        processVideoFrame();
     </script>
 </body>
 </html>
