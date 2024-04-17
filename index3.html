@@ -10,6 +10,7 @@
     <canvas id="canvasElement"></canvas>
     <div id="open"></div>
     <div id="read"></div>
+    <div id="fenxi"></div>
     <script>
         const videoElement = document.getElementById('videoElement');
         const canvasElement = document.getElementById('canvasElement');
@@ -35,10 +36,12 @@
             context.drawImage(videoElement, 0, 0, canvas.width, canvas.height);
             const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
             const brightness = imageData.data.reduce((acc, val, idx) => acc + val, 0) / (imageData.data.length * 4);
-
+            const fenxi = document.getElementById('fenxi');
             if (brightness < 10) {
+                fenx.innerText = '视频是黑屏！' + Date.now();
                 console.log('视频是黑屏！');
             } else {
+                fenx.innerText = fenx.innerText + '视频不是黑屏。'
                 console.log('视频不是黑屏。');
             }
         }
