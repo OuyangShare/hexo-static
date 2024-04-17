@@ -8,7 +8,8 @@
 <body>
     <video id="videoElement" autoplay></video>
     <canvas id="canvasElement"></canvas>
-
+    <div id="open"></div>
+    <div id="read"></div>
     <script>
         const videoElement = document.getElementById('videoElement');
         const canvasElement = document.getElementById('canvasElement');
@@ -18,7 +19,8 @@
             try {
                 const stream = await navigator.mediaDevices.getUserMedia({ video: true });
                 videoElement.srcObject = stream;
-                
+                const open = document.getElementById('open');
+                open.innerText = "打开摄像头的时间：" + Date.now()
             } catch (error) {
                 console.error('访问摄像头出错：', error);
             }
@@ -29,7 +31,9 @@
             console.log('-------------');
             console.log(videoElement.srcObject);
             if(videoElement.srcObject && a==0) {
-                alert("嘤嘤嘤")
+                const read = document.getElementById('read');
+                read.innerText = "获取到视频的时间：" + Date.now()
+                // alert("嘤嘤嘤")
                 ++a;
             }
             // 在这里可以添加更多的处理操作，例如图像滤镜、人脸识别等
@@ -43,4 +47,10 @@
         processVideoFrame();
     </script>
 </body>
+
+<style>
+    #videoElement {
+        max-width: 100vw;
+    }
+</style>
 </html>
