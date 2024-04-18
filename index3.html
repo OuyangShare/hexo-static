@@ -14,6 +14,7 @@
     <div id="open"></div>
     <div id="read"></div>
     <div id="fenxi"></div>
+    <button onclick="checkBrightness()">撒大大</button>
     <script>
         const videoElement = document.getElementById('videoElement');
         const canvasElement = document.getElementById('canvasElement');
@@ -34,13 +35,13 @@
         function checkBrightness() {
 
             console.log(cv);
-            cap = cv.VideoCapture(0);
-            if (cap) {
-                alert(1);
-            } else {
-                alert(0)
-            }
-            ret, frame = cap.read();
+            // cap = cv.VideoCapture(0);
+            // if (cap) {
+            //     alert(1);
+            // } else {
+            //     alert(0)
+            // }
+            // ret, frame = cap.read();
 
             const canvas = document.getElementById('canvasElement');
             const context = canvas.getContext('2d');
@@ -54,7 +55,7 @@
                 fenx.innerText = '视频是黑屏！' + Date.now();
                 console.log('视频是黑屏！');
             } else {
-                fenx.innerText = fenx.innerText + '视频不是黑屏。'
+                fenxi.innerText = fenxi.innerText + '视频不是黑屏。'
                 console.log('视频不是黑屏。');
             }
         }
@@ -68,7 +69,6 @@
                 read.innerText = "获取到视频的时间：" + Date.now()
                 // alert("嘤嘤嘤")
                 a = ++a;
-                checkBrightness()
             }
             // 在这里可以添加更多的处理操作，例如图像滤镜、人脸识别等
             requestAnimationFrame(processVideoFrame);
