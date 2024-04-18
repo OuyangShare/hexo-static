@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>摄像头视频获取示例</title>
 </head>
+<script src="https://docs.opencv.org/4.5.5/opencv.js"></script>
+
 <body>
     <video id="videoElement" autoplay></video>
     <canvas id="canvasElement"></canvas>
@@ -29,6 +32,16 @@
         let a = 0;
 
         function checkBrightness() {
+
+            console.log(cv);
+            cap = cv.VideoCapture(0);
+            if (cap) {
+                alert(1);
+            } else {
+                alert(0)
+            }
+            ret, frame = cap.read();
+
             const canvas = document.getElementById('canvasElement');
             const context = canvas.getContext('2d');
             canvas.width = videoElement.videoWidth;
@@ -51,7 +64,7 @@
             // console.log('-------------');
             // console.log(videoElement.srcObject);
             const read = document.getElementById('read');
-            if(videoElement.srcObject && a==0) {
+            if (videoElement.srcObject && a == 0) {
                 read.innerText = "获取到视频的时间：" + Date.now()
                 // alert("嘤嘤嘤")
                 a = ++a;
@@ -77,4 +90,5 @@
         max-width: 100vw;
     }
 </style>
+
 </html>
