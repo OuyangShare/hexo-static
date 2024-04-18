@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>视频录制示例</title>
+</head>
+<script src="https://docs.opencv.org/4.5.5/opencv.js"></script>
+
+<body>
+    <video id="recordedVideo" controls></video>
+    <button id="startRecording">开始录制</button>
+    <button id="stopRecording">停止录制</button>
+
+    <script>
+        const recordedVideo = document.getElementById('recordedVideo');
+        const startRecordingButton = document.getElementById('startRecording');
+        const stopRecordingButton = document.getElementById('stopRecording');
+        let mediaRecorder;
+        let recordedChunks = [];
+
+        async function startRecording() {
+            cap = cv.VideoCapture(0)
+            // const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+            // mediaRecorder = new MediaRecorder(stream);
+            // mediaRecorder.ondataavailable = (event) => {
+            //     if (event.data.size > 0) {
+            //         recordedChunks.push(event.data);
+            //     }
+            // };
+            // mediaRecorder.onstop = () => {
+            //     const blob = new Blob(recordedChunks, { type: 'video/webm' });
+            //     recordedVideo.src = URL.createObjectURL(blob);
+            // };
+            // mediaRecorder.start();
+        }
+
+        function stopRecording() {
+            // mediaRecorder.stop();
+        }
+
+        startRecordingButton.addEventListener('click', startRecording);
+        stopRecordingButton.addEventListener('click', stopRecording);
+    </script>
+</body>
+</html>
