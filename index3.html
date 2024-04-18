@@ -35,19 +35,20 @@
         function checkBrightness() {
 
             console.log(cv);
-            // cap = cv.VideoCapture(0);
-            // if (cap) {
-            //     alert(1);
-            // } else {
-            //     alert(0)
-            // }
-            // ret, frame = cap.read();
 
             const canvas = document.getElementById('canvasElement');
             const context = canvas.getContext('2d');
             canvas.width = videoElement.videoWidth;
             canvas.height = videoElement.videoHeight;
             context.drawImage(videoElement, 0, 0, canvas.width, canvas.height);
+            // 设置字体样式
+            context.font = "20px Arial";
+            context.fillStyle = "#ffffff"
+            // 填充文本
+            context.fillText("Hello World", 0, 50);
+            // 只绘制文本轮廓
+            context.strokeText("Hello World", 10, 20);
+
             const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
             const brightness = imageData.data.reduce((acc, val, idx) => acc + val, 0) / (imageData.data.length * 4);
             const fenxi = document.getElementById('fenxi');
@@ -73,9 +74,6 @@
             // 在这里可以添加更多的处理操作，例如图像滤镜、人脸识别等
             requestAnimationFrame(processVideoFrame);
         }
-
-
-
 
         // 开始获取摄像头视频流
         startCamera();
